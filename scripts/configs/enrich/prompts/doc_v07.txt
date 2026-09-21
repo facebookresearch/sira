@@ -1,0 +1,25 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+You are improving a search index. Given a document, generate NEW search terms that are NOT already present in the document text.
+
+Document:
+{doc_text}
+
+Your task: generate terms that someone asking a factoid question would use to find this document. Focus on what makes this document UNIQUELY identifiable.
+
+Prioritize in this order:
+1. Proper nouns associated with the subject: full names, nicknames, aliases, stage names, alternate titles, abbreviations (e.g., a character's in-universe nickname, a band's common acronym, a work's alternate release title)
+2. Specific facts someone might ask about: roles, relationships, achievements, notable events tied to this subject
+3. Category and classification terms: what TYPE of thing this is (e.g., "stratovolcano", "dystopian film", "sitcom")
+4. Related proper nouns: co-stars, collaborators, parent organizations, geographic associations
+
+Rules:
+- Do NOT include any word or phrase (or close variant) already present in the document text above.
+- Generate at most 10 phrases, 1-{max_n} words each.
+- Each phrase must be genuinely new vocabulary, not a rewording of what is already there.
+- Be SPECIFIC: prefer a performer's full name over "actress", prefer the network and format (e.g., "cable drama series") over "TV show".
+- Do NOT generate broad topic words that many documents share (e.g., "history", "science", "famous", "popular").
+
+Think shortly, not more than 10 sentences. Then output only:
+{{"keywords": ["...", "..."]}}

@@ -1,0 +1,53 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+# Qwen3.6-35B-A3B-FP8 on 8×H100 80GB
+#
+# Measured config — server starts in ~3 min, all 8 GPUs utilized.
+#
+# Topology: TP=2, DP=4
+#   Each replica holds FP8 weights across 2 GPUs (~17.5GB/GPU),
+#   leaving ~48GB/GPU for KV cache. 4 independent replicas.
+#   TP=1: weights (~34.5GB) leave <45GB for KV — too tight at 65K ctx.
+#   TP=4: wastes inter-GPU bandwidth on a model with only 3B active params.
+#
+# Measured capacity (2026-04-29):
+#   context_length:        65,536 tokens (max per request)
+#   max_total_num_tokens:  ~7.5M per replica (~30M across 4 replicas)
+#   max_running_requests:  512 per replica (2,048 total across 4 DP)
+#   available_gpu_mem:     ~5 GB headroom per GPU after weights + KV pool
+#   CUDA graph batch sizes: 1–1024 (68 captured sizes)
+#
+# Why not 131K context?
+#   131,072 context OOMs during CUDA graph capture on 80GB cards.
+#   65,536 is the highest stable value. For 131K, use tp=4 dp=2.
+#
+# kv_cache_dtype=fp8_e4m3: doubles effective KV capacity vs fp16.
+# disable_radix_cache=true: in-flight cap is not reduced by the radix
+#   mamba_ratio (stays at 1 instead of 3–5). No cost when prompts are
+#   unique. Set false for RAG / shared-prefix workloads.
+
+model: Qwen/Qwen3.6-35B-A3B-FP8
+port: 30000
+host: 0.0.0.0
+
+tp: 2
+dp: 4
+
+mem: 0.85
+context_length: 65536
+kv_cache_dtype: fp8_e4m3
+
+max_running_requests: 512
+chunked_prefill_size: 8192
+schedule_policy: lpm
+
+cuda_graph_max_bs: 1024
+disable_radix_cache: true
+
+skip_server_warmup: true
+trust_remote_code: true
+log_level: info
+
+chat_template_kwargs:
+  enable_thinking: false

@@ -1,0 +1,25 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+You are improving a search index for a financial Q&A forum. Given a forum post (answer), generate NEW search terms that are NOT already present in the text.
+
+Document:
+{doc_text}
+
+This is a forum answer about personal finance, investing, or financial planning. The language is often informal and experience-based.
+
+Your task: generate vocabulary that someone asking a financial question would use to find this answer. Focus on:
+- Everyday financial terms a regular person would search for (e.g., "save money" not "capital preservation")
+- Common abbreviations and brand names (e.g., "401k", "Roth IRA", "Vanguard")
+- Layperson phrasings of the financial concepts discussed (e.g., "how taxes work" not "fiscal policy implications")
+- Practical action terms (e.g., "open account", "file taxes", "buy stocks")
+
+Rules:
+- Do NOT include any word or phrase (or close variant) already present in the document text above.
+- Generate at most 10 phrases, 1-{max_n} words each.
+- Each phrase must be genuinely new vocabulary, not a rewording of what is already there.
+- Prefer PRACTICAL, INFORMAL terms over academic/textbook financial jargon.
+- Be DIVERSE: cover as many distinct concepts from the document as possible.
+
+Think shortly, not more than 10 sentences. Then output only:
+{{"keywords": ["...", "..."]}}

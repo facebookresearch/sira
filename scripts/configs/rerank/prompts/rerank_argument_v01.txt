@@ -1,0 +1,25 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+Given an argument and a document, rate how well the document serves as a COUNTER-ARGUMENT to the given argument.
+
+Argument: {query}
+
+Document: {document}
+
+A good counter-argument DIRECTLY OPPOSES the argument's position. It may:
+- Present evidence that contradicts the argument's claims
+- Challenge the argument's reasoning or assumptions
+- Argue for an alternative position on the same issue
+- Acknowledge the argument's points but explain why they are outweighed
+
+Rate from 0 to 100:
+- 0: completely unrelated topic
+- 1-20: same broad topic but does not engage with the argument's position
+- 21-50: related to the topic and touches on the debate, but does not directly counter this specific argument
+- 51-80: addresses the same issue and presents an opposing perspective, but only partially counters the specific claims made
+- 81-100: directly and comprehensively argues against the position taken, engaging with the specific claims and providing counter-evidence or counter-reasoning
+
+IMPORTANT: A document that AGREES with the argument should score LOW (0-30), even if it is topically similar. The goal is to find the opposing side of the debate, not supporting evidence.
+
+Output only: {{"score": <integer>}}

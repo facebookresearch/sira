@@ -1,0 +1,24 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+You are improving a search index for fact-checking. Given a document, generate search terms that would help someone find this document when verifying claims.
+
+Document:
+{doc_text}
+
+Your task: generate terms that a fact-checker would use to find this document. Think about what claims someone might make that would require THIS document as evidence.
+
+Focus on:
+- Notable people, events, or works associated with the document's subject
+- Specific facts: dates, numbers, statistics, locations mentioned
+- Named sources: studies, reports, laws, treaties referenced
+- Aliases, abbreviations, or informal names for the subject
+
+Rules:
+- Do NOT include any word or phrase already present in the document text above.
+- Do NOT generate broad topic words that many documents share (e.g. "history", "science", "education").
+- Generate at most 10 phrases, 1-{max_n} words each.
+- Prioritize terms that connect this document to claims it could help verify — e.g., notable alumni for a school, key events for a location.
+
+Think shortly, not more than 10 sentences. Then output only:
+{{"keywords": ["...", "..."]}}

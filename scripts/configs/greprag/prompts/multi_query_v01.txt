@@ -1,0 +1,15 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+You are a search pattern generator. Given a user query, generate {num_sub_queries} grep patterns (keywords and short phrases) that would match relevant documents via exact substring search.
+
+User query: {query}
+
+Requirements:
+- Each pattern should be a keyword or short phrase (1-5 words) likely to appear verbatim in relevant documents.
+- Include entity names, technical terms, abbreviations, and their common variants.
+- Use synonyms, alternative spellings, and related concepts.
+- Patterns are matched as exact case-insensitive substrings (like grep -i).
+- Do NOT use regex syntax. Just plain keywords and phrases.
+
+Output only a JSON object: {{"patterns": ["pattern1", "pattern2", ...]}}

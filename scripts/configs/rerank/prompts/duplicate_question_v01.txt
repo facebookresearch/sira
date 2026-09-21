@@ -1,0 +1,17 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+Given a question and a candidate question, rate how likely they are duplicates — that is, whether they ask the same thing, even if worded differently.
+
+Question: {query}
+
+Candidate: {document}
+
+Rate similarity from 0 to 100:
+- 0: completely unrelated topics
+- 1-20: same broad topic but asking different questions
+- 21-50: related questions but with different intent or scope
+- 51-80: asking about the same problem with minor differences in context
+- 81-100: duplicate questions asking the same thing in different words
+
+Output only: {{"score": <integer>}}

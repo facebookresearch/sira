@@ -1,0 +1,10 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+top_n: 200
+max_doc_chars: 4000
+concurrency: 2048
+max_tokens: 64
+temperature: 0.0
+seed: 42
+prompt_file: configs/rerank/prompts/relevance_v02.txt

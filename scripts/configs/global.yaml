@@ -1,0 +1,9 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+db_root: ./experiments
+selection_metric: "Recall@10"
+# Split used to choose configs (n-gram order, which run becomes `best`).
+# Never data.split: selecting on the reported split biases the numbers.
+# Falls back to `train`; datasets with neither get no selection at all.
+selection_split: dev

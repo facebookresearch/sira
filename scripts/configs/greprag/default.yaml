@@ -1,0 +1,10 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+num_sub_queries: 10
+top_k_per_query: 200
+concurrency: 2048
+max_tokens: 512
+temperature: 0
+seed: 42
+prompt_file: configs/greprag/prompts/multi_query_v01.txt

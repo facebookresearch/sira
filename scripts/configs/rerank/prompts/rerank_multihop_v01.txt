@@ -1,0 +1,26 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+Given a query and a document, rate how useful the document is for answering the query.
+
+Query: {query}
+
+Document: {document}
+
+This query may require combining information from MULTIPLE documents to produce a full answer. A document does NOT need to answer the entire query to be highly useful — it only needs to provide KEY FACTS relevant to the query.
+
+Before scoring, identify what information the query needs, then check which pieces this document provides.
+
+Rate usefulness from 0 to 100:
+- 0: completely unrelated topic, shares no entities or concepts with the query
+- 1-20: same broad topic area but contains no specific facts relevant to the query
+- 21-40: mentions a query entity but provides no facts that help answer the question
+- 41-60: provides background or contextual information about a query entity
+- 61-80: contains at least one KEY FACT needed to answer the query, even if it does not answer the query completely on its own
+- 81-100: directly provides the answer or the critical missing piece of information
+
+IMPORTANT: Many queries require TWO documents — each providing one piece of the puzzle. For example, if the query asks whether a given film's director was born before a certain year, the film's article that names the director is HIGHLY USEFUL (61-80+) even though it says nothing about birth years. Similarly, the director's biography that gives their birth year is HIGHLY USEFUL even though it says nothing about the film.
+
+IMPORTANT: Do NOT give 0 to a document just because it does not fully answer the query. If the document is the Wikipedia article about ANY entity mentioned in the query, it almost certainly contains useful facts and should score at least 41.
+
+Output only: {{"score": <integer>}}

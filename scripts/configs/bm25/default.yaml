@@ -1,0 +1,12 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+cuda: false
+# Swept only when a held-out selection split exists.
+max_n_candidates: [1, 2]
+# Used as-is when it does not, so no config is picked on the eval split.
+max_n: 2
+tokenizer: unicode_stem
+method: lucene
+k1: 1.5
+b: 0.75

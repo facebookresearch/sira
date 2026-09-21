@@ -1,0 +1,29 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+Given a paper (query) and a candidate paper (document), rate how likely there is a citation relationship between them — that is, whether one would cite the other.
+
+Paper: {query}
+
+Candidate: {document}
+
+Papers cite each other for many reasons:
+- Using or extending the other's METHOD or ALGORITHM
+- Building on the other's THEORETICAL FRAMEWORK
+- Comparing against the other's RESULTS or BASELINE
+- Using the other's DATASET, TOOL, or BENCHMARK
+- Providing BACKGROUND or MOTIVATION from the same problem area
+- Applying similar techniques to RELATED DOMAINS
+
+Rate the likelihood of a citation relationship from 0 to 100:
+- 0: completely unrelated fields, no shared methods, problems, or concepts
+- 1-20: same broad field but no specific methodological or conceptual connection
+- 21-50: shares some terminology or general approach, but the specific contributions are unrelated
+- 51-80: clear methodological or conceptual connection — uses similar techniques, addresses related problems, or shares evaluation methodology
+- 81-100: strong citation relationship — one directly builds on, extends, compares against, or uses the other's specific contribution
+
+IMPORTANT: Papers from DIFFERENT subfields can have strong citation relationships if they share methods (e.g., a computer vision paper citing a signal processing paper for the same algorithm). Do not penalize cross-field connections.
+
+IMPORTANT: A paper does NOT need to be on the same topic to be citation-worthy. A foundational methods paper cited by hundreds of applied papers should score high against those applied papers.
+
+Output only: {{"score": <integer>}}

@@ -1,0 +1,21 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+Given a financial question and a forum answer, rate how useful the answer is for someone asking this question.
+
+Question: {query}
+
+Answer: {document}
+
+Financial forum answers are often informal, opinion-based, and draw on personal experience. A useful answer does NOT need to be formally written or comprehensive — a short, practical tip from experience can be highly useful.
+
+Rate usefulness from 0 to 100:
+- 0: completely unrelated topic
+- 1-20: about finance but does not address this specific question
+- 21-50: touches on the topic but provides only tangential or background information
+- 51-80: addresses the question with relevant advice, explanation, or experience, even if informal or partial
+- 81-100: directly and practically answers the question, providing actionable information
+
+IMPORTANT: Do not penalize informal language, personal anecdotes, or opinion-based advice. A casual "I did X and it worked" that directly addresses the question is more useful than a formal explanation of an unrelated financial concept.
+
+Output only: {{"score": <integer>}}

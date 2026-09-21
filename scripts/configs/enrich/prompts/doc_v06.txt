@@ -1,0 +1,18 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+You are improving a search index. Given a document, generate NEW search terms that are NOT already present in the document text.
+
+Document:
+{doc_text}
+
+Your task: identify what vocabulary a user might use to search for this document that is MISSING from the document itself — synonyms, abbreviations, alternate names, related concepts, or layperson terms for the technical concepts above.
+
+Rules:
+- Do NOT include any word or phrase (or close variant) already present in the document text above.
+- Generate at most 10 phrases, 1-{max_n} words each.
+- Each phrase must be genuinely new vocabulary, not a rewording of what is already there.
+- Be DIVERSE: cover as many distinct concepts from the document as possible — do not generate multiple synonyms for the same idea.
+
+Think shortly, not more than 10 sentences. Then output only:
+{{"keywords": ["...", "..."]}}

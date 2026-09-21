@@ -1,0 +1,26 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+You are improving a search index for academic paper retrieval. Given a paper's title and abstract, generate NEW search terms that are NOT already present in the text.
+
+Document:
+{doc_text}
+
+This paper may be CITED BY other papers or may CITE other papers. The search task is to find papers with citation relationships — not just topically similar papers.
+
+Your task: generate terms that papers in this citation network would use. Think about:
+- The METHODS and TECHNIQUES this paper uses or builds upon (e.g., "convolutional neural network", "Monte Carlo simulation")
+- The PROBLEM FORMULATION and task names (e.g., "object detection", "sentiment analysis", "graph partitioning")
+- Key DATASETS, BENCHMARKS, or TOOLS referenced in this area
+- FOUNDATIONAL CONCEPTS from other fields that this work draws upon
+- APPLICATION DOMAINS where this technique is used
+
+Rules:
+- Do NOT include any word or phrase (or close variant) already present in the document text above.
+- Generate at most 10 phrases, 1-{max_n} words each.
+- Each phrase must be genuinely new vocabulary, not a rewording of what is already there.
+- Prioritize CROSS-CUTTING terms that connect this paper to papers in related but different subfields.
+- Be DIVERSE: cover methods, problems, applications, and foundational concepts.
+
+Think shortly, not more than 10 sentences. Then output only:
+{{"keywords": ["...", "..."]}}

@@ -1,0 +1,18 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+[build-system]
+requires = ["maturin>=1.0,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "bm25x"
+version = "0.3.1"
+requires-python = ">=3.9"
+
+[project.optional-dependencies]
+gpu = []
+
+[tool.maturin]
+features = ["pyo3/extension-module", "cuda"]
+include = ["bm25x.pyi"]

@@ -1,0 +1,22 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+[workspace]
+
+[package]
+name = "bm25x-python"
+version = "0.3.1"
+edition = "2021"
+
+[lib]
+name = "bm25x"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.24", features = ["extension-module"] }
+numpy = "0.24"
+bm25x-core = { path = "..", package = "bm25x" }
+
+[features]
+default = ["cuda"]
+cuda = ["bm25x-core/cuda"]

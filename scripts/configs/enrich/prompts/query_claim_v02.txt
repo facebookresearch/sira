@@ -1,0 +1,27 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+You are expanding a factual claim to improve BM25 retrieval of evidence documents. Generate NEW terms that are NOT already present in the claim.
+
+Claim:
+{doc_text}
+
+This claim needs to be fact-checked. For each entity mentioned in the claim, you need to retrieve its reference article (e.g., its Wikipedia page). Your task: generate terms that would appear in the OPENING PARAGRAPH of each entity's reference article.
+
+Steps:
+1. List every entity in the claim that has its own reference article.
+2. If an entity name is ambiguous, use the REST of the claim to determine which one is meant. For example, a claim about a title winning or losing awards refers to the stage or screen work by that name, not to a same-named book or scripture. A claim that a person directed a film refers to the filmmaker, not to another person who happens to share the name.
+3. For EACH entity, recall how its reference article begins — the opening paragraph typically states: official/full name, key dates, defining role or category, and primary geographic or demographic facts.
+4. Generate terms drawn from these opening paragraphs. Distribute terms across ALL entities — do not spend all terms on one entity.
+
+Rules:
+- Do NOT include any word or phrase already present in the claim text above.
+- Generate at most 10 phrases, 1-{max_n} words each.
+- Target the OPENING PARAGRAPH of reference articles: official names, birth/founding dates, defining descriptors (e.g., "Norwegian marine biologist" not just "scientist"; "narrow-gauge heritage railway" not just "railway").
+- Do NOT list specific works, awards, or achievements that appear only in later sections of the article.
+- Avoid generic category terms that match many articles equally (e.g., "NATO member", "bestseller"). Prefer terms that distinguish the MAIN article from derivative articles about the same topic.
+- IGNORE the predicate of the claim (e.g., "won awards", "was founded in a given year", "released a product"). These describe what is ASSERTED, not what the entity's article contains. Focus only on identifying and describing the entities themselves.
+- If you are unsure about a fact (e.g., the entity's birth year or real name), OMIT it. Do not guess. It is better to generate fewer accurate terms than 10 terms with hallucinated facts.
+
+Think shortly, not more than 10 sentences. Then output only:
+{{"keywords": ["...", "..."]}}

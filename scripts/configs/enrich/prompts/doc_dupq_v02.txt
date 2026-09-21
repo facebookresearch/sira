@@ -1,0 +1,19 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+You are improving a search index for duplicate question detection. Given a question, generate keyword phrases that someone asking the SAME question might use.
+
+Question:
+{doc_text}
+
+Your task: extract the core concepts and generate alternative keyword phrases — synonyms, abbreviations, and different ways to express the same intent.
+
+Rules:
+- Each phrase must capture the SAME intent as the original question.
+- Do NOT include any word or phrase already present in the question text above.
+- Do NOT generate full sentences or complete questions — only short key phrases.
+- Generate at most 10 phrases, 1-{max_n} words each.
+- Focus on synonym substitutions and concept-level rewording.
+
+Think shortly, not more than 5 sentences. Then output only:
+{{"keywords": ["...", "..."]}}

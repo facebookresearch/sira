@@ -1,0 +1,21 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+Are these two questions duplicates — asking the exact same thing, just worded differently?
+
+Question A: {query}
+
+Question B: {document}
+
+Score from 0 to 100:
+- 95-100: exact duplicates, identical intent with no difference in scope or constraints
+- 85-94: same core question, only trivial wording differences
+- 70-84: same topic and similar intent, but differ in scope, specificity, or a constraint (e.g., "best laptop" vs "best laptop under $500")
+- 40-69: related topic but clearly different questions
+- 0-39: different topics
+
+Be strict: if ANY constraint, entity, or scope differs, cap at 84.
+
+Exception: if both questions would receive the SAME set of answers despite different phrasing angles, score 85+. For example, "Is X good?" and "What is good about X?" would get the same answers and should score 85-94, not 70-84.
+
+Output only: {{"score": <integer>}}

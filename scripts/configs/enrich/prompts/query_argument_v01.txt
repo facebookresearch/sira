@@ -1,0 +1,24 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+You are expanding a search query to find the counter-argument to a given argument. Generate NEW terms that are NOT already present in the query.
+
+Query:
+{doc_text}
+
+This query is an argument taking a specific position. You need to find the document that ARGUES AGAINST this position — the counter-argument.
+
+Your task: generate vocabulary that the counter-argument would contain but that is MISSING from this query. Think about:
+- What objections or rebuttals would be raised against this position?
+- What alternative evidence, frameworks, or values would the opposing side invoke?
+- What concessions might the opposing side make before arguing against?
+
+Rules:
+- Do NOT include any word or phrase already present in the query text above.
+- Generate at most 10 phrases, 1-{max_n} words each.
+- Each phrase must add new vocabulary not already in the query.
+- Focus on OPPOSING-PERSPECTIVE vocabulary, not just topic synonyms.
+- Be DIVERSE: cover different angles of potential counter-arguments.
+
+Think shortly, not more than 10 sentences. Then output only:
+{{"keywords": ["...", "..."]}}

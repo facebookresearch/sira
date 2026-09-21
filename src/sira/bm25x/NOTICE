@@ -1,0 +1,6 @@
+This directory contains code derived from bm25x by LightOn
+(https://github.com/lightonai/bm25x), originally licensed under the
+Apache License 2.0. See LICENSE in this directory for the original license.
+
+Modifications by Meta Platforms, Inc. are licensed under the MIT License.
+See the LICENSE file in the repository root for details.

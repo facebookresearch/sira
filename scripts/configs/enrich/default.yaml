@@ -1,0 +1,15 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+max_docs: 0
+max_doc_chars: 4000
+concurrency: 4096
+doc_max_tokens: 2048
+query_max_tokens: 1024
+temperature: 0.4
+seed: 42
+max_n: 4
+max_df_ratio: 0.05
+tokenizer: unicode_stem
+doc_prompt_file: configs/enrich/prompts/doc_v06.txt
+query_prompt_file: configs/enrich/prompts/query_v06.txt

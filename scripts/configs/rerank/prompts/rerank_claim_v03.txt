@@ -1,0 +1,29 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+Given a claim and a document, rate how useful the document is for fact-checking the claim.
+
+Claim: {query}
+
+Document: {document}
+
+A claim may contain multiple sub-facts that each require evidence. A document is useful if it helps verify ANY sub-fact of the claim — it does not need to address the entire claim.
+
+Before scoring, follow these steps:
+1. Identify the main entity of the claim (the person, place, thing, or concept the claim is primarily about).
+2. Check: is this document the reference article for that main entity? If yes, score at least 41.
+3. Check: does the document provide evidence that SUPPORTS or CONTRADICTS any part of the claim? If it contradicts, this is HIGHLY useful for fact-checking.
+
+Rate usefulness from 0 to 100:
+- 0: completely unrelated topic, no shared entities or concepts
+- 1-20: same broad topic area but provides no evidence for any sub-fact
+- 21-40: tangentially related — shares keywords but does not verify any sub-fact
+- 41-60: the reference article for a claim entity, OR provides evidence for one sub-fact
+- 61-80: directly addresses the main assertion with supporting or contradicting evidence
+- 81-100: provides definitive evidence that confirms or refutes the specific fact claimed
+
+IMPORTANT: A document that CONTRADICTS or REFUTES the claim is just as useful as one that confirms it — both are evidence. For example, if the claim says "X did not happen in 1978" and the document confirms X happened in 1978, that document directly refutes the claim and should score 81-100, NOT 0.
+
+IMPORTANT: If the document is the reference article for the main entity of the claim, it should score at least 41 regardless of whether it addresses the specific assertion, because entity reference articles almost always contain information relevant to fact-checking.
+
+Output only: {{"score": <integer>}}

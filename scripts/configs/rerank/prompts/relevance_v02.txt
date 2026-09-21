@@ -1,0 +1,17 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+Given a query and a document, rate how useful the document is for answering the query. A document is useful if it provides evidence that supports, refutes, or partially addresses the query. Both confirming and contradicting evidence count as relevant.
+
+Query: {query}
+
+Document: {document}
+
+Rate usefulness from 0 to 100:
+- 0: completely unrelated topic
+- 1-20: same broad topic but does not address the query
+- 21-50: partially relevant, provides indirect or background information
+- 51-80: directly addresses the query with supporting or contradicting evidence
+- 81-100: comprehensively answers the query with clear evidence
+
+Output only: {{"score": <integer>}}

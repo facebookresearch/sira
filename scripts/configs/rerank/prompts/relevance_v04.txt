@@ -1,0 +1,27 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+Given a query and a document, rate how useful the document is for answering the query.
+
+Query: {query}
+
+Document: {document}
+
+Before scoring, follow these steps:
+1. What is the query actually asking? Identify the specific information needed (a name, a date, a type, a count, a location, etc.).
+2. Scan the document sentence by sentence: does ANY sentence contain or imply the answer? Even one sentence with the answer in a long article counts.
+3. If the document IS the reference article for the query's main entity, score at least 41 — entity articles almost always contain useful information.
+
+Rate usefulness from 0 to 100:
+- 0: completely unrelated topic, shares no entities or concepts with the query
+- 1-20: peripherally related but no sentence addresses what the query asks
+- 21-40: discusses related concepts without containing the specific answer
+- 41-60: the reference article for the query's main entity, OR contains information that partially answers the query
+- 61-80: contains the answer, even if only in one sentence of a longer article
+- 81-100: directly and clearly states the answer to the query
+
+IMPORTANT: Score based on whether the ANSWER is present, not whether the document is "about" the query topic. An encyclopedia article on a subject that states the subject's classification in a single clause fully answers a "what type of X is it" query and scores 81+, even though the article covers many other topics. A reference list or table that states a total answers a "how many" query and scores 61+. An article that names an institution's founder answers a "who founded it" query and scores 81+.
+
+IMPORTANT: A score of 0 means the document has NOTHING to do with the query — no shared people, places, things, or concepts. If the document mentions ANY entity from the query, the score must be above 0.
+
+Output only: {{"score": <integer>}}

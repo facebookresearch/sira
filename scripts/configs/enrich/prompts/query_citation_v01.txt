@@ -1,0 +1,26 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+You are expanding a paper title/abstract to find papers it cites or that cite it. Generate NEW terms that are NOT already present in the query.
+
+Query:
+{doc_text}
+
+This is a scientific paper. You need to find papers that have a CITATION RELATIONSHIP with it — papers it references or papers that reference it.
+
+Your task: generate vocabulary that cited/citing papers would contain. Think about:
+- What METHODS does this paper likely build upon? What foundational techniques would it cite?
+- What PROBLEM does this paper address? What other papers solve similar or related problems?
+- What DATASETS or EVALUATION METHODS are standard in this area?
+- What APPLICATIONS or DOMAINS use similar techniques?
+- What THEORETICAL FOUNDATIONS from other fields does this work draw on?
+
+Rules:
+- Do NOT include any word or phrase already present in the query text above.
+- Generate at most 10 phrases, 1-{max_n} words each.
+- Each phrase must add new vocabulary not already in the query.
+- Focus on CROSS-FIELD connections — terms from adjacent research areas that share methods or applications.
+- Be DIVERSE: cover upstream methods, downstream applications, evaluation, and theoretical foundations.
+
+Think shortly, not more than 10 sentences. Then output only:
+{{"keywords": ["...", "..."]}}

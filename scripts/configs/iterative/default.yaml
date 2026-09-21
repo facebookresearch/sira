@@ -1,0 +1,13 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+max_iterations: 5
+top_k_per_iter: 20
+snippet_chars: 500
+concurrency: 32
+max_tokens: 512
+temperature: 0.001
+seed: 42
+final_top_k: 200
+scoring: best_rank
+prompt_file: configs/iterative/prompts/react_v01.txt

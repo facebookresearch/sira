@@ -1,0 +1,37 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+[package]
+name = "bm25x"
+version = "0.3.1"
+edition = "2021"
+description = "A fast, streaming-friendly BM25 search engine with mmap support"
+license = "MIT AND Apache-2.0"
+repository = "https://github.com/facebookresearch/sira"
+homepage = "https://github.com/facebookresearch/sira"
+keywords = ["bm25", "search", "retrieval", "mmap", "streaming"]
+categories = ["text-processing", "database"]
+readme = "README.md"
+exclude = ["benchmarks/", "python/", ".github/", ".pre-commit-config.yaml"]
+
+[dependencies]
+memmap2 = "0.9"
+bincode = "1.3"
+serde = { version = "1", features = ["derive"] }
+rust-stemmers = "1.2"
+unicode-normalization = "0.1"
+rayon = "1.10"
+rustc-hash = "2"
+murmurhash3 = "0.0.5"
+regex = "1"
+indicatif = "0.17"
+ryu = "1"
+tantivy-query-grammar = "0.26.0"
+cudarc = { version = "0.19", default-features = false, features = ["cuda-11040", "driver", "dynamic-loading", "nvrtc"], optional = true }
+
+[features]
+default = []
+cuda = ["dep:cudarc"]
+
+[dev-dependencies]
+tempfile = "3"

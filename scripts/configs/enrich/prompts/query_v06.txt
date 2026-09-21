@@ -1,0 +1,18 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+You are expanding a search query to improve retrieval. Generate NEW terms that are NOT already present in the query.
+
+Query:
+{doc_text}
+
+Your task: identify vocabulary that a correct answer document would contain but that is MISSING from the query — synonyms, domain terms, abbreviations, related concepts, or alternate phrasings the answer document would use.
+
+Rules:
+- Do NOT include any word or phrase already present in the query text above.
+- Generate at most 10 phrases, 1-{max_n} words each.
+- Each phrase must add new vocabulary not already in the query.
+- Be DIVERSE: cover multiple distinct facets of what a correct answer would address — do not generate synonyms for the same concept.
+
+Think shortly, not more than 10 sentences. Then output only:
+{{"keywords": ["...", "..."]}}

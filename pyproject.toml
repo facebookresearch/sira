@@ -1,0 +1,130 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sira"
+version = "0.1.0"
+description = "SIRA: SuperIntelligent Retrieval Agent"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.12"
+dependencies = [
+    # Core ML
+    "torch==2.11.0",
+    "torchvision==0.26.0",
+    "transformers==5.6.0",
+    "sglang==0.5.11",
+    "flash-attn-4[cu13]>=4.0.0b1",
+    "sglang-kernel",
+    "flashinfer-jit-cache",
+    # Core / Scientific
+    "numpy",
+    "numba",
+    "packaging",
+    "pybind11",
+    "maturin",
+    "types-tqdm",
+    # Data
+    "pyarrow",
+    "pandas",
+    "polars",
+    "torchdata",
+    "datasets",
+    "datatrove[all]",
+    "distilabel",
+    # Training
+    "accelerate",
+    "trl",
+    "peft",
+    "deepspeed",
+    "torchao",
+    # Retrieval / IR
+    "beir",
+    "tantivy",
+    "nltk",
+    # Evaluation
+    "ragas",
+    "lm-eval",
+    "mathruler",
+    "math-verify",
+    "pylatexenc",
+    # Infrastructure
+    "hydra-core",
+    "ray",
+    "tenacity",
+    "tensorboard",
+    "gpustat",
+    # Monitoring / Logging
+    "wandb",
+    "trackio",
+    # Misc
+    "openai",
+    "pyyaml",
+]
+authors = [
+    {name = "Zeyu Yang"},
+]
+
+[project.optional-dependencies]
+serve = ["fastapi>=0.100", "uvicorn>=0.20"]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "matplotlib",
+    "streamlit",
+    "ipywidgets",
+]
+gpu-dedup = ["nemo-curator"]
+
+[project.urls]
+Homepage = "https://github.com/facebookresearch/sira"
+Repository = "https://github.com/facebookresearch/sira"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# ── uv: custom package indexes ──────────────────────────────────────────────
+
+[tool.uv]
+index-strategy = "unsafe-best-match"
+prerelease = "allow"
+environments = ["sys_platform == 'linux'"]
+
+[[tool.uv.index]]
+name = "pytorch-cu130"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true
+
+[[tool.uv.index]]
+name = "sglang-cu130"
+url = "https://docs.sglang.ai/whl/cu130/"
+explicit = true
+
+[[tool.uv.index]]
+name = "flashinfer-cu130"
+url = "https://flashinfer.ai/whl/cu130"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu130" }
+torchvision = { index = "pytorch-cu130" }
+sglang-kernel = { index = "sglang-cu130" }
+flashinfer-jit-cache = { index = "flashinfer-cu130" }
+
+# ── Tool configs ─────────────────────────────────────────────────────────────
+
+[tool.pyrefly]
+project_includes = ["sira"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+markers = [
+    "bench: scaling benchmarks (slow; opt-in via -m bench)",
+    "slow: slow tests (~30-90s); opt-out via -m 'not slow'",
+]
+# Skip bench tests by default — opt in with `-m bench`.
+addopts = "-m 'not bench'"

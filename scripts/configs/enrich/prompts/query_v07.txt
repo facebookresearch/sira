@@ -1,0 +1,28 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+You are expanding a search query to improve BM25 retrieval. Generate NEW terms that are NOT already present in the query.
+
+Query:
+{doc_text}
+
+Your task: generate vocabulary that would appear in the Wikipedia article containing the answer, but that is MISSING from the query.
+
+CRITICAL RULES:
+- Do NOT guess the answer to the question. If the query asks "who did X", do NOT generate person names. If it asks "when did X", do NOT generate dates. If it asks "where is X", do NOT generate place names that are not already in the query. The answer is UNKNOWN — your job is to help FIND it, not to predict it.
+- Instead, expand with TOPIC and DOMAIN vocabulary: the subject area, the type of article, related concepts, and contextual terms that the answer article would use alongside the answer.
+- For questions about movies/TV/music: generate the franchise name, genre, medium, and format terms — NOT actor names, director names, or plot details you are guessing.
+- For questions about history/sports/science: generate the field, era, category, and related terminology — NOT specific names, dates, or outcomes you are guessing.
+
+Good example: a query asking which country hosted an early edition of an international sports tournament → expand with the sport's governing body, the sport's alternate names, "tournament", "championship", "host nation", and the relevant decade (a decade, not a specific year).
+Bad example: the same query expanded with a guessed country name, or with vocabulary from a different sport entirely.
+
+Rules:
+- Do NOT include any word or phrase already present in the query text above.
+- Generate at most 10 phrases, 1-{max_n} words each.
+- Each phrase must add new vocabulary not already in the query.
+- Be DIVERSE: cover multiple distinct facets of the topic — do not generate synonyms for the same concept.
+- Prefer terms that NARROW the topic (e.g., a sport's governing body rather than "sports") without guessing the specific answer.
+
+Think shortly, not more than 10 sentences. Then output only:
+{{"keywords": ["...", "..."]}}

@@ -1,0 +1,28 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+Given a claim and a document, rate how useful the document is for fact-checking the claim.
+
+Claim: {query}
+
+Document: {document}
+
+Before scoring, follow these steps:
+1. List every entity mentioned in the claim (people, places, things, works, organizations).
+2. For EACH entity: is this document the reference article for that entity? If yes, score at least 41.
+3. Does the document provide evidence that SUPPORTS or CONTRADICTS any part of the claim? A document that contradicts the claim is EQUALLY useful — both are evidence for fact-checking.
+4. For "is X a Y?" claims (e.g., "X is a machine", "X is a musician"): if the document defines or describes category Y, it is useful even if it does not mention X specifically. Score at least 41.
+
+Rate usefulness from 0 to 100:
+- 0: completely unrelated — shares no entities, concepts, or categories with the claim
+- 1-20: peripherally related but provides no evidence for any part of the claim
+- 21-40: shares keywords but does not help verify any sub-fact
+- 41-60: the reference article for a claim entity, OR a category/class article relevant to the claim, OR provides evidence for one sub-fact
+- 61-80: directly addresses the main assertion with supporting or contradicting evidence
+- 81-100: provides definitive evidence that confirms or refutes the specific fact claimed
+
+IMPORTANT: A score of 0 means the document has NOTHING to do with the claim. If the document mentions ANY entity from the claim, the score must be above 0. A band's reference article is ALWAYS relevant to a claim about that band — score at least 41.
+
+IMPORTANT: When the claim is FALSE or contains negation (e.g., "X did not have a soundtrack", "X has zero awards"), documents providing evidence that the claim is wrong are HIGHLY useful. A film's reference article that lists its soundtrack directly refutes a claim that the film had no soundtrack, and scores 81+.
+
+Output only: {{"score": <integer>}}

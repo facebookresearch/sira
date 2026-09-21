@@ -1,0 +1,23 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+You are expanding a search query to find answers on a financial Q&A forum. Generate NEW terms that are NOT already present in the query.
+
+Query:
+{doc_text}
+
+Your task: generate vocabulary that a helpful forum answer would contain but that is MISSING from the query. Think about how experienced people give financial advice informally:
+- Practical terms and brand names they would mention (e.g., "Schwab", "index fund", "emergency fund")
+- Informal explanations they would use (e.g., "tax hit", "take-home pay", "nest egg")
+- Related financial concepts the answer would touch on
+- Common follow-up considerations a good answer would address
+
+Rules:
+- Do NOT include any word or phrase already present in the query text above.
+- Generate at most 10 phrases, 1-{max_n} words each.
+- Each phrase must add new vocabulary not already in the query.
+- Prefer PRACTICAL, INFORMAL terms over textbook financial terminology.
+- Be DIVERSE: cover multiple facets of what a good answer would discuss.
+
+Think shortly, not more than 10 sentences. Then output only:
+{{"keywords": ["...", "..."]}}
